@@ -1,0 +1,21 @@
+name: Github Action Demo
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    env:
+      ENV1: ${{ secrets.ENV1 }}
+      ENV2: ${{ secrets.ENV2 }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.19
+      - name: Go Run Main
+        run: go run main.go
